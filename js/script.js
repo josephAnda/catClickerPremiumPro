@@ -39,7 +39,7 @@
 
 	var view = {
 		init: function() {
-			var names = controller.getNames(model[cats]),
+			var names = controller.getNames(model.cats),
 				catList = document.getElementById("catList");
 				
 			//stores html elements for easy access later
@@ -118,9 +118,9 @@
 
 		//  Main logic of the page.  Iterates through list of cats and instructs view to render based on clicks
 		select: function(node, index) {
-			var counts = this.getCounts(model[cats]),
-			 	names = this.getNames(model[cats]),
-			 	currentCat = model[cats][index],
+			var counts = this.getCounts(model.cats),
+			 	names = this.getNames(model.cats),
+			 	currentCat = model.cats[index],
 			 	mainView = document.getElementById('mainView');
 			 	
 
