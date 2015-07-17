@@ -3,41 +3,43 @@
 	"use strict";
 
 	var model = {
-		paws : {
+		currentCat: null,
+		cats: [{  
 			name: 'Paws',
 			pic: 'images/cat1.jpg',
 			count: 0,
 			imgURL: 'http://fakeurl1.org'
-		},
-		catherine : {
+			},
+			{	
 			name: 'Catherine',
 			pic: 'images/cat2.jpg',
 			count: 0,
 			imgURL: 'http://fakeurl2.org'
-		},
-		scratches : {
+			},
+			{
 			name: 'Scratches',
 			pic: 'images/cat3.jpg',
 			count: 0,
 			imgURL: 'http://fakeurl3.org'
-		},
-		meowza : {
+			},
+			{
 			name: 'Meowza',
 			pic: 'images/cat4.jpg',
 			count: 0,
 			imgURL: 'http://fakeurl4.org'
-		},
-		purrl : {
+			},
+			{
 			name: 'Purrl',
 			pic: 'images/cat5.jpg',
 			count: 0,
 			imgURL: 'http://fakeurl5.org'
-		}
+			}
+		]
 	};
 
 	var view = {
 		init: function() {
-			var names = controller.getNames(model),
+			var names = controller.getNames(model[cats]),
 				catList = document.getElementById("catList");
 				
 			//stores html elements for easy access later
@@ -95,17 +97,17 @@
 		init: function() {
 			view.init();
 		},
-		getNames: function(obj) {
+		getNames: function(array) {
 			var names = [];
-			for (var key in obj) {
-				names.push(obj[key].name);
+			for (var i = 0; i < array.length; i++) {
+				names.push(array[i].name);
 			};
 			return names;
 		},
-		getCounts: function(obj) {
+		getCounts: function(array) {
 			var counts = [];
-			for (var key in obj) {
-				counts.push(obj[key].count);
+			for (var i = 0; i < array.length; i++) {
+				counts.push(array[i].count);
 			};
 			return counts;
 		},
@@ -116,16 +118,15 @@
 
 		//  Main logic of the page.  Iterates through list of cats and instructs view to render based on clicks
 		select: function(node, index) {
-			var counts = this.getCounts(model),
-			 	names = this.getNames(model),
-			 	currentName = names[index],
+			var counts = this.getCounts(model[cats]),
+			 	names = this.getNames(model[cats]),
+			 	currentCat = model[cats][index],
 			 	mainView = document.getElementById('mainView');
 			 	
 
 			
 
-			node[index].addEventListener('click', function() {
-				var currentCat = controller.getCurrentCat(names, index);  
+			node[index].addEventListener('click', function() {  
 			  	console.log(currentCat);
 			  	currentCat.count++;
 			  	view.catCount.innerHTML = currentCat.count;
