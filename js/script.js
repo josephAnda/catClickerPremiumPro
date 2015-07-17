@@ -118,21 +118,22 @@
 
 		//  Main logic of the page.  Iterates through list of cats and instructs view to render based on clicks
 		select: function(node, index) {
+			
 			var counts = this.getCounts(model.cats),
 			 	names = this.getNames(model.cats),
-			 	currentCat = model.cats[index],
 			 	mainView = document.getElementById('mainView');
 			 	
 
 			
 
 			node[index].addEventListener('click', function() {  
-			  	console.log(currentCat);
-			  	currentCat.count++;
-			  	view.catCount.innerHTML = currentCat.count;
+				model.currentCat = model.cats[index];
+			  	console.log(model.currentCat);
+			  	model.currentCat.count++;
+			  	view.catCount.innerHTML = model.currentCat.count;
 			  	view.catPic.src = 'images/cat' + (index + 1) + '.jpg';
-			  	view.catName.innerHTML = currentCat.name;
-			  	view.catURL.innerHTML = currentCat.imgURL;
+			  	view.catName.innerHTML = model.currentCat.name;
+			  	view.catURL.innerHTML = model.currentCat.imgURL;
 			  	
 			  	var formExists = function() {
 			  		return document.getElementsByTagName('form').length != 0;
@@ -193,9 +194,9 @@
 									model[newName] = model[currentCat];
 									delete model[currentCat];
 									*/
-									currentCat.name = document.getElementById('name').value; 
+									model.currentCat.name = document.getElementById('name').value; 
 									//currentCat.count = document.getElementById('count').value;
-									currentCat.imgURL = document.getElementById('imgURL').value;
+									model.currentCat.imgURL = document.getElementById('imgURL').value;
 									removeChildren('catList');
 									view.init();
 									return false;
