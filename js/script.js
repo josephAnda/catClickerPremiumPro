@@ -8,31 +8,31 @@
 			name: 'Paws',
 			pic: 'images/cat1.jpg',
 			count: 0,
-			imgURL: 'http://fakeurl1.org'
+			imgURL: 'http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg'
 			},
 			{	
 			name: 'Catherine',
 			pic: 'images/cat2.jpg',
 			count: 0,
-			imgURL: 'http://fakeurl2.org'
+			imgURL: 'http://animalia-life.com/cat.html'
 			},
 			{
 			name: 'Scratches',
 			pic: 'images/cat3.jpg',
 			count: 0,
-			imgURL: 'http://fakeurl3.org'
+			imgURL: 'http://www.vetprofessionals.com/catprofessional/images/home-cat.jpg'
 			},
 			{
 			name: 'Meowza',
 			pic: 'images/cat4.jpg',
 			count: 0,
-			imgURL: 'http://fakeurl4.org'
+			imgURL: 'https://www.petfinder.com/wp-content/uploads/2012/11/101438745-cat-conjunctivitis-causes.jpg'
 			},
 			{
 			name: 'Purrl',
 			pic: 'images/cat5.jpg',
 			count: 0,
-			imgURL: 'http://fakeurl5.org'
+			imgURL: 'http://affordablecatanddoghospital.com/cat/images/stories/slide/cats-two.jpg'
 			}
 		]
 	};
@@ -188,14 +188,9 @@
 							form.onsubmit = function() {
 									//alert('default prevented');
 									//alert(document.getElementById('name').value);
-									//TODO so currently the name is being changed but not the key, so the changed cat throws an error when referenced
-									/*
-									newName = document.getElementById('name').value;
-									model[newName] = model[currentCat];
-									delete model[currentCat];
-									*/
+									
 									model.currentCat.name = document.getElementById('name').value; 
-									//currentCat.count = document.getElementById('count').value;
+									model.currentCat.count = document.getElementById('count').value;
 									model.currentCat.imgURL = document.getElementById('imgURL').value;
 									removeChildren('catList');
 									view.init();
