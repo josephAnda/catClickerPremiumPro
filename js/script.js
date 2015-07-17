@@ -83,12 +83,12 @@
 			}
 		},
 		createButton: function(id, label) {
-					var button = document.createElement('button');
-					var text = document.createTextNode(label);
-					button.appendChild(text);
-					button.type = button;
-					button.id = id;
-					return button;
+			var button = document.createElement('button');
+			var text = document.createTextNode(label);
+			button.appendChild(text);
+			button.type = button;
+			button.id = id;
+			return button;
 		}
 	};
 
@@ -110,10 +110,6 @@
 			};
 			return counts;
 		},
-		getCurrentCat: function(name_array, index) {
-			return model[name_array[index].toLowerCase()];
-
-		},
 		//  Main logic of the page.  Iterates through list of cats and instructs view to render based on clicks
 		select: function(node, index) {
 			
@@ -123,7 +119,6 @@
 	
 			node[index].addEventListener('click', function() {  
 				model.currentCat = model.cats[index];
-			  	console.log(model.currentCat);
 			  	model.currentCat.count++;
 			  	view.catCount.innerHTML = model.currentCat.count;
 			  	view.catPic.src = 'images/cat' + (index + 1) + '.jpg';
@@ -136,24 +131,20 @@
 			  	var buttonExists = function() {
 			  		return document.getElementById('admin')
 			  	}
-			  	//  The logic below ensures that the form elements aren't duplicated
-			  	
-
+			  	//  The logic below ensures that the form elements aren't duplicated in the event of multiple clicks
 			  	var addAdminButton = function() {
-				  	
-				  		mainView.appendChild(view.createButton('admin', 'Admin'));
-					  	var admin = document.getElementById('admin');
-					  	admin.onclick = function() {
+			  		mainView.appendChild(view.createButton('admin', 'Admin'));
+				  	var admin = document.getElementById('admin');
+				  	admin.onclick = function() {
 						var form = document.createElement('form'),
 						    currentName = view.catName.innerHTML,
 						    currentURL = view.catURL.innerHTML,
 						    currentCount = view.catCount.innerHTML;
 
-
 						mainView.removeChild(admin);
 						createField('name', 'Name', currentName);
 						createField('count', 'Click Count', currentCount);
-						createField('imgURL', 'Image URL (fake)', currentURL);
+						createField('imgURL', 'Image URL', currentURL);
 						
 						form.appendChild(view.createButton('save', 'Save'));
 						form.appendChild(view.createButton('cancel','Cancel'));
@@ -164,7 +155,7 @@
 						var removeChildren = function(node_id) {
 							var myNode = document.getElementById(node_id);
 							while (myNode.firstChild) {
-   									myNode.removeChild(myNode.firstChild);
+										myNode.removeChild(myNode.firstChild);
 								}
 						}
 						saveButton.onclick = function() {
@@ -179,11 +170,7 @@
 							addAdminButton();
 							return false;
 						}
-
 						form.onsubmit = function() {
-								//alert('default prevented');
-								//alert(document.getElementById('name').value);
-								
 								model.currentCat.name = document.getElementById('name').value; 
 								model.currentCat.count = document.getElementById('count').value;
 								model.currentCat.imgURL = document.getElementById('imgURL').value;
@@ -191,17 +178,13 @@
 								view.init();
 								return false;
 						}
-
 						function createField(fieldId, fieldLabel, currentValue) {
 							var input = document.createElement('input');
 							var label = document.createElement('label');
 							var content = document.createTextNode(fieldLabel);
 							var br = document.createElement('br')
 							input.type = "text";
-							//Why doesn't the assignment below do anything?
 							input.id = fieldId;
-							//label.for = fieldId;
-
 							input.value = currentValue;
 							label.appendChild(content);
 							form.appendChild(label);
@@ -210,19 +193,16 @@
 						}
 					}
 				}
+				//  Adds button, which renders a form when pressed.  Form fields update based on current cat
 				if ((!buttonExists()) && (!formExists())) {
 			  		addAdminButton();
 			  	} else if (formExists()) {
 			  		document.getElementById('name').value = model.currentCat.name;
 					document.getElementById('count').value = model.currentCat.count;
 					document.getElementById('imgURL').value = model.currentCat.imgURL;
-
 			  	}
-
 		  	}, false);
 		}
 	};
 	controller.init();
-	
-	
 })()
